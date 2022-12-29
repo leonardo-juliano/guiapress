@@ -1,0 +1,48 @@
+<%- include ('./partials/header.ejs'); %>
+<%- include ('./partials/homenavbar.ejs'); %>
+
+<div class="container">
+    <hr>
+    <div class="jumbotron">
+        <h1 class="display-4">Bem-vindo</h1>
+        <p class="lead">Este é um simples blog do guia do programador.</p>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" href="/admin/articles/new" role="button">Criar um Artigo</a>
+      </div>
+    <hr>
+    <hr>
+    <table class="table table-bordered">
+            <tbody>
+                <% article.forEach(article => { %>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><%= article.title %></h2>
+                        </div>
+                        <div class="card-body">
+                            <a href="/<%= article.slug %>" class="btn btn-success">Ler artigo</a>
+                        </div>
+                    </div>
+                    <br>
+                <% }) %>
+        </thead>
+    </table>
+    
+
+</div>
+<%- include ('./partials/footer.ejs'); %>
+<script>
+    function confirmedDelete(event, form){
+        event.preventDefault();
+        let decision = confirm("Você quer deletar esta categoria?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>
+
+
+
+
+
+
+
