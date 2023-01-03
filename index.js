@@ -18,8 +18,15 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 app.get("/",(req, res)=>{
-    Article.findAll().then(article => {
-        res.render("index", {article: article});
+    Article.findAll(({
+        order:[
+            ['id','DESC']
+        ]
+    })).then(article => {
+        Category.findAll().then(categories=>{
+            res.render("index", {article: article, categories:categories});
+        })
+        
     });
 });
 
@@ -36,6 +43,23 @@ app.get("/:slug", (req,res)=>{
             res.redirect("/")
         }
 
+    }).catch( err=>{
+        res.redirect("/")
+    })
+})
+
+app.get("category/:slug", (req, res)=> {
+    Category.findOne({
+        where: {
+            slug:slug
+        },
+        include: [{model: Article}]
+    }).then( category => {
+        if(category != undefined){
+
+        }else{
+            res.redirect("/")
+        }
     }).catch( err=>{
         res.redirect("/")
     })
