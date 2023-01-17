@@ -13,7 +13,7 @@
     <hr>
     <table class="table table-bordered">
             <tbody>
-                <% article.forEach(article => { %>
+                <% articles.forEach(article => { %>
                     <div class="card">
                         <div class="card-header">
                             <h2><%= article.title %></h2>
@@ -26,6 +26,12 @@
                 <% }) %>
         </thead>
     </table>
+    <div class="row">
+        <div class="col col-12">
+            <a href="/articles/page/2" style="float:right">NEXT >>>></a>
+        </div>
+
+    </div>
     
 
 </div>

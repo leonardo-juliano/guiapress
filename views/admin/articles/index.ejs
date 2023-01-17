@@ -25,10 +25,14 @@
                         <th><%= articles.category.title %></th>
                         <th><%= articles.slug %></th>
                         <th>
+                            <a href="/admin/articles/edit/<%= articles.id %>"><button type="button" class="btn btn-warning" onclick="">Editar</button></a>
+                        </th>
+                        <th>
                             <form action="/articles/delete" method="POST" style="display: inline;" onsubmit="confirmedDelete(event,this)">
                                 <input type="hidden" name="id" value="<%= articles.id %>"  >
                                 <button class="btn btn-danger">Deletar</button>
                             </form>
+                            
                         </th>
                         
                     </tr>

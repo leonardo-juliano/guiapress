@@ -19,12 +19,14 @@ app.set('view engine', 'ejs');
 
 app.get("/",(req, res)=>{
     Article.findAll(({
+        limit: 4,
         order:[
-            ['id','DESC']
+            ['id','DESC'],
+            
         ]
-    })).then(article => {
+    })).then(articles => {
         Category.findAll().then(categories=>{
-            res.render("index", {article: article, categories:categories});
+            res.render("index", {articles: articles, categories:categories});
         })
         
     });
@@ -48,7 +50,8 @@ app.get("/:slug", (req,res)=>{
     })
 })
 
-app.get("category/:slug", (req, res)=> {
+app.get("/category/:slug", (req, res)=> {
+    var slug = req.params.slug;
     Category.findOne({
         where: {
             slug:slug
@@ -56,6 +59,9 @@ app.get("category/:slug", (req, res)=> {
         include: [{model: Article}]
     }).then( category => {
         if(category != undefined){
+            Category.findAll().then(categories => {
+                res.render("index",{articles: Category.articles, categories: categories});
+            })
 
         }else{
             res.redirect("/")
