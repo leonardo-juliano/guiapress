@@ -91,7 +91,12 @@ router.post("/articles/update",(req,res)=>{
 router.get("/articles/page/:num", (req,res)=>{
     var page = req.params.num;
     var offset = 0;
+    var pageAnterior = page - 1;
+    var pageProximo = parseInt(page) + 1;
 
+
+
+    console.log("numero da page é:" + pageAnterior);
     if(isNaN(page) || page == 1 ){
         offset = 0;
     }else{
@@ -116,9 +121,21 @@ router.get("/articles/page/:num", (req,res)=>{
             articles:articles
         }
 
+        var anterior;
+        if(offset-1 < 0){
+            anterior = false
+        }else{
+            anterior=true;
+        }
+        var result2 = {
+            anterior: anterior,
+            articles:articles
+        }
+
         
         Category.findAll().then(categories =>{
-            res.render("admin/articles/page", {result: result, categories:categories})
+            res.render("admin/articles/page", {result: result, categories:categories, pageAnterior:pageAnterior, pageProximo:pageProximo})
+            
         });
 
     }).catch(error =>{

@@ -5,10 +5,12 @@ const connection = require("./database/database");
 //importando os controllers com os router
 const categoriesController = require("./categories/CategoriesController")
 const articleController = require("./articles/ArticlesController");
+const userController = require("./users/UsersController");
 
 //importando os models
 const Article = require("./articles/Article");
 const Category = require("./categories/Category")
+const User = require("./users/User")
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -83,6 +85,7 @@ connection
 
 app.use("/",categoriesController);//utilizando as rotas que contem dentro do arquivo categoriesController
 app.use("/",articleController);
+app.use("/",userController);
 
 
 
