@@ -9,15 +9,24 @@ const userController = require("./users/UsersController");
 
 //importando os models
 const Article = require("./articles/Article");
-const Category = require("./categories/Category")
-const User = require("./users/User")
+const Category = require("./categories/Category");
+const User = require("./users/User");
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+const session = require("express-session")
+
 
 app.set('view engine', 'ejs');
+
+app.use(session({
+    secret: "qualquercoisa",
+    cookie:{
+        maxAge: 30000
+    }
+}));
 
 app.get("/",(req, res)=>{
     Article.findAll(({

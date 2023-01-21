@@ -3,18 +3,16 @@
 
 <div class="container">
     <div class="card-header">
-        <h2>Cadastre um usuario</h2>
+        <h2>Entrar</h2>
     </div>
     <div class="card-body">
-        <form action="/users/create" method="POST">
-            <input type="text" class="form-control" placeholder="Nome" name="name">
-            <br>
+        <form action="/authenticate">
             <input type="email" class="form-control" placeholder="email" name="email">
             <br>
             <input type="password" class="form-control" placeholder="senha" name="password">
             <br>
             <div>
-                <button class="btn btn-success">Cadastrar</button>
+                <button class="btn btn-success">Entrar</button>
             </div>
             
         </form>
